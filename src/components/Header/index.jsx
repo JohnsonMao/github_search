@@ -12,7 +12,9 @@ export default class Header extends Component {
     axios
       .get(` https://api.github.com/search/users?q=${keyWord}`)
       .then(
-        response => { console.log('Success', response.data );},
+        response => { 
+          this.props.saveUsers( response.data.items )
+        },
         error => { console.log('Error', error );}
       )
   }
