@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PubSub from 'pubsub-js'
 
 export default class Header extends Component {
   
@@ -10,18 +9,18 @@ export default class Header extends Component {
     // 獲取輸入
     const { keyWordElement:{ value: keyWord }} = this
     // 發動請求前，更新狀態
-    PubSub.publish('search',{isFirst: false, isLoading: true})
+    this.props.updataAppState({isFirst: false, isLoading: true})
     // 發送請求
     axios
       .get(` https://api.github.com/search/users?q=${keyWord}`)
       .then(
         response => { 
           // 請求成功後，更新狀態
-          PubSub.publish('search',{isLoading: false, users: response.data.items})
+          this.props.updataAppState({isLoading: false, users: response.data.items})
         },
         error => {
           // 請求失敗後，更新狀態
-          PubSub.publish('search',{isLoading: false, err:error.message})
+          this.props.updataAppState({isLoading: false, err:error.message})
         }
       )
   }

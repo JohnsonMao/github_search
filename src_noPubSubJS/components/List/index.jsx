@@ -1,29 +1,9 @@
 import React, { Component } from 'react'
-import PubSub from 'pubsub-js'
 
 export default class List extends Component {
-
-  state = {
-    // 初始值
-    users: [], // 用戶初始清單
-    isFirst: true, // 是否第一次打開畫面
-    isLoading: false, // 使否正在載入中
-    err: '', // 存取請求相關錯誤訊息
-  }
-
-  componentDidMount(){
-    this.token = PubSub.subscribe('search', (_,stateObj)=>{
-      this.setState(stateObj);
-    })
-  }
-
-  componentWillUnmount(){
-    PubSub.unsubcribe(this.token)
-  }
-
   render() {
 
-    const { users, isFirst, isLoading, err } = this.state
+    const { users, isFirst, isLoading, err } = this.props
 
     return (
       <div className="container text-center py-3">
