@@ -1,4 +1,4 @@
-# GitHub search
+# GitHub search | [Demo](https://johnsonmao.github.io/github_search/)
 
 ## React practice
 
